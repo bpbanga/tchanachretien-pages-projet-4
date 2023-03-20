@@ -86,4 +86,13 @@ public class TicketDAO {
         }
         return false;
     }
+
+
+    public double getNbTicket(String vehicleRegNumber) { 
+        double nbticket = 0; 
+        
+
+      return nbticket; 
+    }
+ 
 }

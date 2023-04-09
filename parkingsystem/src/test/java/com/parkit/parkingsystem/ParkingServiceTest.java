@@ -35,22 +35,6 @@ public class ParkingServiceTest {
     @BeforeEach
     private void setUpPerTest() {
         try {
-            /*when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
-            ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
-            Ticket ticket = new Ticket();
-            ticket.setInTime(new Date(System.currentTimeMillis() - (60*60*1000)));
-            ticket.setParkingSpot(parkingSpot);
-            ticket.setVehicleRegNumber("ABCDEF");
-            ticket.setPrice(0);
-            ticket.setOutTime(null);
-            
-            //when(ticketDAO.getTicket(anyString())).thenReturn(ticket);
-            //when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(true);
-            //when(ticketDAO.getNbTicket(anyString())).thenReturn(0D);
-            
-            //when(parkingSpotDAO.updateParking(any(ParkingSpot.class))).thenReturn(true);*/
-            
-
             parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         } catch (Exception e) {
             e.printStackTrace();

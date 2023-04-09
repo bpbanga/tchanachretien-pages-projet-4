@@ -10,13 +10,15 @@ public class FareCalculatorService {
             throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
         }
 
+        // FIX timestamp tronqué par la BDD
+        //long inHour = Math.round(ticket.getInTime().getTime()/1000)*1000;
+        //long outHour = Math.round(ticket.getOutTime().getTime()/1000)*1000;
         long inHour = ticket.getInTime().getTime();
         long outHour = ticket.getOutTime().getTime();
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
         double duration = (outHour - inHour)/ (1000 * 3600D);
-
-            if ( duration <= 0.5)   {
+         if ( duration <= 0.5)   {
              ticket.setPrice(0);                        
          } else{
 

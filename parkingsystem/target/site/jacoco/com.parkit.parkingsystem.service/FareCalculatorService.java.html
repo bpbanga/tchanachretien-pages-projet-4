@@ -10,41 +10,43 @@ import com.parkit.parkingsystem.model.Ticket;
 <span class="fc" id="L10">            throw new IllegalArgumentException(&quot;Out time provided is incorrect:&quot;+ticket.getOutTime().toString());</span>
         }
 
-<span class="fc" id="L13">        long inHour = ticket.getInTime().getTime();</span>
-<span class="fc" id="L14">        long outHour = ticket.getOutTime().getTime();</span>
+        // FIX timestamp tronqué par la BDD
+        //long inHour = Math.round(ticket.getInTime().getTime()/1000)*1000;
+        //long outHour = Math.round(ticket.getOutTime().getTime()/1000)*1000;
+<span class="fc" id="L16">        long inHour = ticket.getInTime().getTime();</span>
+<span class="fc" id="L17">        long outHour = ticket.getOutTime().getTime();</span>
 
         //TODO: Some tests are failing here. Need to check if this logic is correct
-<span class="fc" id="L17">        double duration = (outHour - inHour)/ (1000 * 3600D);</span>
+<span class="fc" id="L20">        double duration = (outHour - inHour)/ (1000 * 3600D);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">         if ( duration &lt;= 0.5)   {</span>
+<span class="fc" id="L22">             ticket.setPrice(0);                        </span>
+         } else{
 
-<span class="fc bfc" id="L19" title="All 2 branches covered.">            if ( duration &lt;= 0.5)   {</span>
-<span class="fc" id="L20">             ticket.setPrice(0);                        </span>
-<span class="fc" id="L21">         } else{</span>
-
-<span class="pc bpc" id="L23" title="1 of 3 branches missed.">                 switch (ticket.getParkingSpot().getParkingType()){</span>
+<span class="pc bpc" id="L25" title="1 of 3 branches missed.">                 switch (ticket.getParkingSpot().getParkingType()){</span>
                 case CAR: {
                 
-<span class="fc" id="L26">                    ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);</span>
-<span class="fc" id="L27">                    break;</span>
+<span class="fc" id="L28">                    ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);</span>
+<span class="fc" id="L29">                    break;</span>
                 }
                 case BIKE: {
-<span class="fc" id="L30">                    ticket.setPrice(duration * Fare.BIKE_RATE_PER_HOUR);</span>
-<span class="fc" id="L31">                    break;</span>
+<span class="fc" id="L32">                    ticket.setPrice(duration * Fare.BIKE_RATE_PER_HOUR);</span>
+<span class="fc" id="L33">                    break;</span>
                 }
-<span class="nc" id="L33">                default: throw new IllegalArgumentException(&quot;Unkown Parking Type&quot;);</span>
+<span class="nc" id="L35">                default: throw new IllegalArgumentException(&quot;Unkown Parking Type&quot;);</span>
                         
              }
              
          }
-<span class="fc bfc" id="L38" title="All 2 branches covered.">         if (discount == true){</span>
-<span class="fc" id="L39">                 ticket.setPrice(ticket.getPrice() * 0.95);</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">         if (discount == true){</span>
+<span class="fc" id="L41">                 ticket.setPrice(ticket.getPrice() * 0.95);</span>
              } 
        
            
-<span class="fc" id="L43">        }</span>
+<span class="fc" id="L45">        }</span>
      public void calculateFare(Ticket ticket ){
-<span class="fc" id="L45">         calculateFare(ticket , false);</span>
+<span class="fc" id="L47">         calculateFare(ticket , false);</span>
 
-<span class="fc" id="L47">         }</span>
+<span class="fc" id="L49">         }</span>
          
     }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
